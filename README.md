@@ -8,6 +8,43 @@ The Observer pattern allows objects to subscribe to state changes of another obj
 2. **Observer**: Listens for updates from the subject and responds to state changes
 3. **Attach/Detach**: Observers can subscribe or unsubscribe from the subject
 
+## Class Diagram
+```
+┌─────────────────┐
+│   ISubject      │
+├─────────────────┤
+│+ Attach()       │
+│+ Detach()       │
+│+ Notify()       │
+└────────┬────────┘
+         △
+         │ implements
+         │
+┌────────┴────────────────┐
+│  ConcreteSubject        │
+├─────────────────────────┤
+│- observers: List        │
+│- state: string          │
+│+ SetState()             │
+│+ GetState()             │
+└────────┬────────────────┘
+         │ notifies
+         │
+    ┌────▼────────────────────────┐
+    │                             │
+┌───┴─────────────┐     ┌────────┴──────┐
+│   IObserver     │     │ IGameObserver  │
+├─────────────────┤     ├────────────────┤
+│+ Update()       │     │+ Update()      │
+└────────┬────────┘     └────────┬───────┘
+         △                       △
+         │ implements            │ implements
+         │                       │
+    ┌────┴──────┐            ┌───┴─────┬──────┬────────────┐
+    │ConcreteObs│            │ Player  │      │            │
+    └───────────┘            └─────────┘  HealthBarUI  ScoreUI
+```
+
 ## Examples
 
 ### First Example
